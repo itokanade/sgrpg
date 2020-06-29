@@ -7,7 +7,7 @@
 // 以下のコメントを外すと実行時エラーが発生した際にエラー内容が表示される
  ini_set('display_errors', 'On');
 ini_set('error_reporting', E_ALL);
-
+require_once("../Util.php");
 //-------------------------------------------------
 // 引数を受け取る
 //-------------------------------------------------
@@ -35,6 +35,9 @@ $sql = 'SELECT * FROM User WHERE id=:id';  // Userテーブルの指定列を取
 // SQLを実行
 //-------------------------------------------------
 try{
+  $dsn = Util::$dsn;
+  $user = Util::$user;
+  $pw = Util::$pw;
   $dbh = new PDO($dsn, $user, $pw);   // 接続
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  // エラーモード
   $sth = $dbh->prepare($sql);         // SQL準備
